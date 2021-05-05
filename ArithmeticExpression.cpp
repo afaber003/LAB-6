@@ -4,6 +4,62 @@
 #include <fstream>
 using namespace std;
 
+arithmeticExpression::arithmeticExpression(const string& input){
+    infixExpression = input;
+}
+
+arithmeticExpression::~arithmeticExpression(){
+    delete this; //FIXME
+}
+/*
+    PREFIX
+*/
+void arithmeticExpression::prefix(){ // i really hope this works    |
+    prefix(root);                                            //     |
+}                                                            //     V                  
+
+void arithmeticExpression::prefix(TreeNode* node){
+    cout << node->data;
+    if (node->left != nullptr){
+        prefix(node->left);
+    }
+    if (node->right != nullptr){
+        prefix(node ->right);
+    }
+}
+/*
+    POSTFIX
+*/
+void arithmeticExpression::postfix(){
+    postfix(root);
+}
+
+void arithmeticExpression::postfix(TreeNode* node){
+    if (node->left != nullptr){
+        postfix(node->left);
+    }
+    if (node->right != nullptr){
+        postfix(node->right);
+    }
+    cout << node->data;
+}
+/*
+    INFIX
+*/
+void arithmeticExpression::infix(){
+    infix(root);
+}
+
+void arithmeticExpression::infix(TreeNode* node){
+    if (node->left != nullptr){
+        infix(node->left);
+    }
+    cout << node->data;
+    if (node->right != nullptr){
+        infix(node->right);
+    }
+}
+
 int arithmeticExpression::priority(char op){
     int priority = 0;
     if(op == '('){
