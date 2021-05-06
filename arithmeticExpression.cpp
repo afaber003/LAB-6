@@ -89,36 +89,31 @@ void arithmeticExpression::visualizeTree(const string &outputFilename){
        root data field. The key for the first node is 'a', 'b' for the second node and so on. */
     void arithmeticExpression::buildTree()
     {
-      string postfix = infix_to_postfix(); //Converts the infixExpression to its equivalent postfix string
+      string pfExpression = infix_to_postfix(); 
     stack <TreeNode*> tree;
-    char data_char = 'a';
     char item;
 
-    for(unsigned i = 0; i < postfix.size(); ++i)
+    for(unsigned i = 0; i < pfExpression.size(); ++i)
     {
-      item = postfix.at(i);
-      if(item == '+' || item == '-' || item == '*' || item == '/') 
+      item = pfExpression.at(i);
+      if(item != '+' && item != '-' && item != '*' && item != '/') 
       {
-        TreeNode* nextRoot = new TreeNode(item, data_char + i); //initialize root
+        TreeNode* next = new TreeNode(item, 'a' + i);
+        tree.push(next);
+        
+      }
+      else 
+      {
+        TreeNode* nextRoot = new TreeNode(item, 'a' + i); //initialize root
         nextRoot -> left = tree.top();  //stack's top is left child
         tree.pop(); //pops top
         nextRoot -> right = tree.top(); //stack's new top is right child
         tree.pop();  //pops top again
         tree.push(nextRoot);  //the tree is pushed on stack
       }
-      else 
-      {
-        TreeNode* next = new TreeNode(item, data_char + i);
-        tree.push(next);
-      }
     }
     root = tree.top();
     tree.pop();
-
-
-    
-      
-      
       
     }
 
