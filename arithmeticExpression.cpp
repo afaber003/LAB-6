@@ -91,20 +91,20 @@ void arithmeticExpression::visualizeTree(const string &outputFilename){
     {
       string pfExpression = infix_to_postfix(); 
     stack <TreeNode*> tree;
-    char item;
+    char curr;
 
     for(unsigned i = 0; i < pfExpression.size(); ++i)
     {
-      item = pfExpression.at(i);
-      if(item != '+' && item != '-' && item != '*' && item != '/') 
+      curr = pfExpression.at(i);
+      if(curr != '+' && curr != '-' && curr != '*' && curr != '/') 
       {
-        TreeNode* next = new TreeNode(item, 'a' + i);
+        TreeNode* next = new TreeNode(curr, 'a' + i);
         tree.push(next);
         
       }
       else 
       {
-        TreeNode* nextRoot = new TreeNode(item, 'a' + i); //initialize root
+        TreeNode* nextRoot = new TreeNode(curr, 'a' + i); //initialize root
         nextRoot -> left = tree.top();  //stack's top is left child
         tree.pop(); //pops top
         nextRoot -> right = tree.top(); //stack's new top is right child
@@ -170,6 +170,7 @@ void arithmeticExpression::visualizeTree(const string &outputFilename){
       }
 
     }*/
+    //Help from Taneesha Sharma
     void arithmeticExpression::infix(TreeNode* node){
     if (node != nullptr){
     if (node->left != nullptr && node -> right != nullptr)
@@ -188,6 +189,7 @@ void arithmeticExpression::visualizeTree(const string &outputFilename){
 
     /* Helper function that outputs the prefix notation of the arithmetic expression tree
        by performing the preorder traversal of the tree. */
+
     void arithmeticExpression::prefix(TreeNode *curr)
     {
       if (curr)
@@ -210,6 +212,7 @@ void arithmeticExpression::visualizeTree(const string &outputFilename){
 
     /* Helper function that outputs the postfix notation of the arithmetic expression tree
        by performing the postorder traversal of the tree. */
+       //Help from Taneesha Sharma
     void arithmeticExpression::postfix(TreeNode *curr)
     {
       if(curr != nullptr)
